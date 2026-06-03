@@ -1,0 +1,32 @@
+DISCHARGE SUMMARY
+
+Patient: Maria Romero        DOB: 1958-03-14
+Admit: 2026-05-18           Discharge: 2026-05-22
+
+REASON FOR ADMISSION
+67-year-old woman with long-standing type 2 diabetes mellitus admitted
+for evaluation of worsening lower-extremity swelling and fatigue.
+
+HOSPITAL COURSE
+Laboratory workup showed an estimated GFR of 48 mL/min/1.73m2 with
+moderate albuminuria. Findings are consistent with chronic kidney
+disease stage 3 secondary to diabetic nephropathy. Renal ultrasound
+was unremarkable. Nephrology recommended ACE-inhibitor titration and
+repeat renal panel in three months.
+
+The patient also reported months of burning and numbness in both feet.
+Monofilament testing demonstrated reduced sensation bilaterally,
+consistent with diabetic peripheral neuropathy. Gabapentin was started
+with good symptomatic relief.
+
+Dilated retinal examination during this admission showed no evidence of
+diabetic retinopathy.
+
+DISCHARGE DIAGNOSES
+Type 2 diabetes mellitus, chronic kidney disease, diabetic neuropathy.
+
+DISCHARGE MEDICATIONS
+Metformin, lisinopril, gabapentin.
+
+FOLLOW-UP
+Primary care in 2 weeks. Nephrology in 3 months.

@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ header.name }} — Larkspur Health</title>
+  <style>
+    :root {
+      --bg: oklch(1 0 0);
+      --sidebar: oklch(0.985 0.001 286);
+      --fg: oklch(0.21 0.01 286);
+      --muted: oklch(0.552 0.016 285.938);
+      --border: oklch(0.92 0.004 286.32);
+      --hover: oklch(0.967 0.001 286.375);
+      --active: oklch(0.94 0.003 286);
+      --primary: oklch(0.205 0 0);
+      --primary-fg: oklch(0.985 0 0);
+      --radius: 10px;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0; display: flex; flex-direction: column; overflow: hidden;
+      font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, ui-sans-serif, sans-serif;
+      color: var(--fg); background: var(--bg);
+    }
+    .ic { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+
+    header.topbar {
+      height: 48px; flex-shrink: 0; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; padding: 0 12px; gap: 8px;
+    }
+    .logo { display: flex; align-items: center; gap: 8px; }
+    .logo .ic { width: 18px; height: 18px; color: var(--primary); }
+    .logo span { font-weight: 600; font-size: 14px; }
+    .spacer { flex: 1; }
+    .iconbtn {
+      display: flex; align-items: center; justify-content: center; width: 30px; height: 30px;
+      border: none; background: none; color: var(--muted); border-radius: 8px; cursor: pointer;
+    }
+    .iconbtn:hover { background: var(--hover); color: var(--fg); }
+    .avatar {
+      width: 30px; height: 30px; border-radius: 50%; background: var(--hover);
+      display: flex; align-items: center; justify-content: center; color: var(--muted);
+    }
+
+    .body { flex: 1; display: grid; grid-template-columns: 264px 1fr 340px; min-height: 0; }
+    .col { min-height: 0; overflow-y: auto; }
+
+    .list { border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; }
+    .list-head { padding: 10px; border-bottom: 1px solid var(--border); display: flex; gap: 6px; align-items: center; }
+    .search { flex: 1; position: relative; display: flex; align-items: center; }
+    .search .ic { position: absolute; left: 9px; width: 14px; height: 14px; color: var(--muted); pointer-events: none; }
+    .search input {
+      width: 100%; padding: 7px 9px 7px 30px; border: 1px solid var(--border); border-radius: 8px;
+      background: var(--bg); font: inherit; font-size: 13px; color: var(--fg);
+    }
+    .search input::placeholder { color: var(--muted); }
+    .list-items { flex: 1; overflow-y: auto; padding: 6px; }
+    .pt-row {
+      display: block; text-decoration: none; color: inherit; padding: 9px 10px; border-radius: 8px; cursor: pointer;
+    }
+    .pt-row:hover { background: var(--hover); }
+    .pt-row.active { background: var(--active); }
+    .pt-row .pt-top { display: flex; align-items: center; gap: 8px; }
+    .pt-row .pt-name { font-size: 13.5px; font-weight: 550; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .badge { font-size: 10px; padding: 1px 6px; border-radius: 999px; border: 1px solid var(--border); color: var(--muted); background: var(--bg); flex-shrink: 0; }
+    .pt-row .pt-sub { font-size: 12px; color: var(--muted); margin-top: 3px; }
+
+    .chart { padding: 22px 26px 60px; }
+    .hero { padding-bottom: 8px; }
+    .hero .name { font-size: 21px; font-weight: 650; letter-spacing: -.015em; }
+    .hero .ident, .hero .contact { color: var(--muted); font-size: 12.5px; margin-top: 4px; }
+    summary {
+      list-style: none; cursor: pointer; display: flex; align-items: center; gap: 8px;
+      padding: 13px 2px; font-size: 11px; font-weight: 600; letter-spacing: .06em;
+      text-transform: uppercase; color: var(--muted); user-select: none;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary .chev { font-size: 9px; opacity: .55; transition: transform .15s ease; }
+    details[open] summary .chev { transform: rotate(90deg); }
+    summary .count { opacity: .55; font-weight: 500; }
+    .rows { padding-bottom: 12px; }
+    .row { display: flex; align-items: baseline; gap: 12px; padding: 4px 8px; margin: 0 -8px; border-radius: 6px; }
+    .row:hover { background: var(--hover); }
+    .row .nm { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .row .meta { flex-shrink: 0; max-width: 46%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--muted); font-size: 12.5px; }
+    .row .dt { flex-shrink: 0; color: var(--muted); opacity: .7; font-size: 12px; font-variant-numeric: tabular-nums; }
+    .notes-title { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); padding: 16px 2px 2px; }
+    .doc { border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; margin-top: 10px; }
+    .doc-h { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+    .doc-t { font-weight: 600; font-size: 13px; }
+    .doc-d { color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+    .doc pre { margin: 0; white-space: pre-wrap; font: 12px/1.6 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: oklch(0.37 0.01 286); }
+    .empty { color: var(--muted); font-style: italic; font-size: 13px; padding: 8px 2px; }
+
+    .actions { border-left: 1px solid var(--border); padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+    .panel-label { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+    .card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; }
+    .card h3 { margin: 0 0 10px; font-size: 13px; font-weight: 600; }
+    .action-btn {
+      width: 100%; display: flex; align-items: center; gap: 10px; padding: 9px 10px; margin-top: 6px;
+      border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--fg);
+      font: inherit; font-size: 13px; text-align: left; cursor: pointer;
+    }
+    .action-btn:first-of-type { margin-top: 0; }
+    .action-btn:hover { background: var(--hover); }
+    .action-btn .ic { width: 15px; height: 15px; color: var(--muted); }
+    .stat-row { display: flex; justify-content: space-between; font-size: 13px; padding: 3px 0; }
+    .stat-row span:last-child { color: var(--muted); font-variant-numeric: tabular-nums; }
+    .term-search { position: relative; display: flex; align-items: center; margin-bottom: 8px; }
+    .term-search .ic { position: absolute; left: 9px; width: 14px; height: 14px; color: var(--muted); }
+    .term-search input { width: 100%; padding: 6px 9px 6px 28px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); font: inherit; font-size: 12.5px; color: var(--fg); }
+    .code-list { max-height: 220px; overflow-y: auto; margin: 0 -4px; }
+    .code-row { display: flex; align-items: baseline; gap: 8px; padding: 5px 4px; border-radius: 6px; }
+    .code-row:hover { background: var(--hover); }
+    .code-name { flex: 1; min-width: 0; font-size: 12.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .code-id { flex-shrink: 0; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11.5px; color: var(--muted); }
+    .code-none { display: none; font-size: 12px; color: var(--muted); font-style: italic; padding: 6px 4px; }
+    .upload-drop { border: 1px dashed var(--border); border-radius: 8px; padding: 14px; text-align: center; }
+    .upload-drop .ic { width: 20px; height: 20px; color: var(--muted); margin: 0 auto 6px; }
+    .upload-drop p { margin: 0 0 10px; font-size: 12.5px; color: var(--muted); }
+    .file-pick { display: block; cursor: pointer; margin-bottom: 8px; }
+    .file-pick input { display: none; }
+    .file-pick span {
+      display: block; padding: 7px 10px; border: 1px solid var(--border); border-radius: 8px;
+      background: var(--bg); font-size: 12.5px; color: var(--fg);
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .file-pick:hover span { background: var(--hover); }
+    .file-pick.empty span { color: var(--muted); }
+    .btn-primary {
+      width: 100%; font: inherit; font-size: 13px; font-weight: 550; padding: 8px 14px;
+      border: none; border-radius: 8px; background: var(--primary); color: var(--primary-fg); cursor: pointer;
+    }
+    .btn-primary:hover { opacity: .9; }
+
+    @media (max-width: 860px) {
+      body { overflow: auto; }
+      .body { display: flex; flex-direction: column; flex: none; overflow: visible; }
+      .col { flex: 0 0 auto; overflow: visible; min-height: 0; }
+      .list { display: none; }
+      .chart { padding: 18px 18px 24px; }
+      .actions { border-left: none; border-top: 1px solid var(--border); }
+    }
+
+    .upload-err {
+      font-size: 12px; color: oklch(0.53 0.14 25); background: oklch(0.97 0.03 25);
+      border: 1px solid oklch(0.88 0.04 25); border-radius: 8px; padding: 8px 10px; margin-bottom: 10px;
+    }
+    .upload-err code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo">
+      <svg class="ic" viewBox="0 0 24 24"><path d="M12 6v4"/><path d="M14 14h-4"/><path d="M14 18h-4"/><path d="M14 8h-4"/><path d="M18 12h2a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2h2"/><path d="M18 22V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v18"/></svg>
+      <span>Larkspur Health</span>
+    </div>
+    <div class="spacer"></div>
+    <div class="avatar">
+      <svg class="ic" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </div>
+  </header>
+
+  <div class="body">
+    <aside class="col list">
+      <div class="list-head">
+        <div class="search">
+          <svg class="ic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" placeholder="Search patients…">
+        </div>
+        <a class="iconbtn" href="/" title="Reload">
+          <svg class="ic" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg>
+        </a>
+      </div>
+      <div class="list-items">
+        <a class="pt-row active" href="/">
+          <div class="pt-top">
+            <span class="pt-name">{{ header.name }}</span>
+            <span class="badge">Active</span>
+          </div>
+          <div class="pt-sub">{{ header.ident }}</div>
+        </a>
+      </div>
+    </aside>
+
+    <main class="col chart">
+      <div class="hero">
+        <div class="name">{{ header.name }}</div>
+        {% if header.ident %}<div class="ident">{{ header.ident }}</div>{% endif %}
+        {% if header.contact %}<div class="contact">{{ header.contact }}</div>{% endif %}
+      </div>
+
+      {% for s in sections %}
+      <details open>
+        <summary><span class="chev">▶</span> {{ s.title }} <span class="count">{{ s.count }}</span></summary>
+        <div class="rows">
+          {% for r in s.rows %}
+          <div class="row">
+            <span class="nm">{{ r.name }}</span>
+            {% if r.meta %}<span class="meta">{{ r.meta }}</span>{% endif %}
+            {% if r.date %}<span class="dt">{{ r.date }}</span>{% endif %}
+          </div>
+          {% endfor %}
+        </div>
+      </details>
+      {% endfor %}
+
+      <div class="notes-title">Clinical Notes</div>
+      {% for d in documents %}
+      <div class="doc">
+        <div class="doc-h"><span class="doc-t">{{ d.title }}</span><span class="doc-d">{{ d.date }}</span></div>
+        <pre>{{ d.text }}</pre>
+      </div>
+      {% else %}
+      <div class="empty">No notes uploaded yet.</div>
+      {% endfor %}
+    </main>
+
+    <aside class="col actions">
+      <div class="panel-label">Actions</div>
+
+      <div class="card">
+        <h3>Add clinical note</h3>
+        {% if error %}<div class="upload-err">Upload failed — <code>{{ error }}</code></div>{% endif %}
+        <form class="upload-drop" action="/documents" method="post" enctype="multipart/form-data">
+          <svg class="ic" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+          <p>Upload a .txt note to this chart</p>
+          <label class="file-pick empty">
+            <input type="file" name="file" accept=".txt" required>
+            <span>Choose a .txt note…</span>
+          </label>
+          <button class="btn-primary" type="submit">Upload note</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <h3>Orders &amp; encounters</h3>
+        <button class="action-btn" type="button">
+          <svg class="ic" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M9 15h6"/><path d="M12 18v-6"/></svg>
+          New encounter
+        </button>
+        <button class="action-btn" type="button">
+          <svg class="ic" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          Order labs
+        </button>
+        <button class="action-btn" type="button">
+          <svg class="ic" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg>
+          Place referral
+        </button>
+        <button class="action-btn" type="button">
+          <svg class="ic" viewBox="0 0 24 24"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
+          Print summary
+        </button>
+      </div>
+
+      <div class="card">
+        <h3>Chart summary</h3>
+        {% for s in sections %}
+        <div class="stat-row"><span>{{ s.title }}</span><span>{{ s.count }}</span></div>
+        {% endfor %}
+        <div class="stat-row"><span>Clinical notes</span><span>{{ documents | length }}</span></div>
+      </div>
+
+      <div class="card">
+        <h3>Terminology</h3>
+        <div class="term-search">
+          <svg class="ic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input id="code-q" type="search" placeholder="Search SNOMED / ICD-10…" autocomplete="off">
+        </div>
+        <div class="code-list" id="code-list">
+          {% for c in codes %}
+          <div class="code-row" data-k="{{ c.display }} {{ c.keywords | join(' ') }}" title="{{ c.display }} · SNOMED {{ c.snomed }} · ICD-10 {{ c.icd10 }}">
+            <span class="code-name">{{ c.display }}</span>
+            <span class="code-id">{{ c.icd10 }}</span>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="code-none" id="code-none">No matching codes.</div>
+      </div>
+    </aside>
+  </div>
+  <script>
+    const pick = document.querySelector(".file-pick")
+    pick.querySelector("input").addEventListener("change", (e) => {
+      const name = e.target.files[0]?.name
+      pick.querySelector("span").textContent = name || "Choose a .txt note…"
+      pick.classList.toggle("empty", !name)
+      document.querySelector(".upload-err")?.remove()
+    })
+
+    const codeQ = document.getElementById("code-q")
+    const codeRows = [...document.querySelectorAll("#code-list .code-row")]
+    const codeNone = document.getElementById("code-none")
+    codeQ.addEventListener("input", () => {
+      const term = codeQ.value.toLowerCase().trim()
+      let shown = 0
+      for (const row of codeRows) {
+        const hit = row.dataset.k.toLowerCase().includes(term)
+        row.style.display = hit ? "" : "none"
+        if (hit) shown++
+      }
+      codeNone.style.display = shown ? "none" : "block"
+    })
+  </script>
+</body>
+</html>

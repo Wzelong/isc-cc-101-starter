@@ -1,0 +1,570 @@
+{
+  "Patient": {
+    "resourceType": "Patient",
+    "id": "example",
+    "identifier": [
+      {
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+              "code": "MR"
+            }
+          ]
+        },
+        "system": "urn:oid:1.2.36.146.595.217.0.1",
+        "value": "BAY-0117-ROM"
+      }
+    ],
+    "name": [
+      {
+        "use": "official",
+        "family": "Romero",
+        "given": [
+          "Maria"
+        ]
+      }
+    ],
+    "gender": "female",
+    "birthDate": "1958-03-14",
+    "address": [
+      {
+        "line": [
+          "482 Larkspur Ave"
+        ],
+        "city": "Riverside",
+        "state": "CA",
+        "postalCode": "92501"
+      }
+    ],
+    "telecom": [
+      {
+        "system": "phone",
+        "value": "+1-951-555-0142",
+        "use": "home"
+      }
+    ]
+  },
+  "Condition": [
+    {
+      "resourceType": "Condition",
+      "id": "cond-dm2",
+      "clinicalStatus": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+            "code": "active"
+          }
+        ]
+      },
+      "verificationStatus": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+            "code": "confirmed"
+          }
+        ]
+      },
+      "category": [
+        {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+              "code": "problem-list-item",
+              "display": "Problem List Item"
+            }
+          ]
+        }
+      ],
+      "code": {
+        "coding": [
+          {
+            "system": "http://snomed.info/sct",
+            "code": "44054006",
+            "display": "Type 2 diabetes mellitus"
+          }
+        ],
+        "text": "Type 2 diabetes mellitus"
+      },
+      "subject": {
+        "reference": "Patient/example"
+      },
+      "onsetDateTime": "2015-06-02"
+    },
+    {
+      "resourceType": "Condition",
+      "id": "cond-htn",
+      "clinicalStatus": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+            "code": "active"
+          }
+        ]
+      },
+      "verificationStatus": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+            "code": "confirmed"
+          }
+        ]
+      },
+      "category": [
+        {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+              "code": "problem-list-item",
+              "display": "Problem List Item"
+            }
+          ]
+        }
+      ],
+      "code": {
+        "coding": [
+          {
+            "system": "http://snomed.info/sct",
+            "code": "59621000",
+            "display": "Essential hypertension"
+          }
+        ],
+        "text": "Essential hypertension"
+      },
+      "subject": {
+        "reference": "Patient/example"
+      },
+      "onsetDateTime": "2017-03-19"
+    },
+    {
+      "resourceType": "Condition",
+      "id": "cond-hld",
+      "clinicalStatus": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+            "code": "active"
+          }
+        ]
+      },
+      "verificationStatus": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+            "code": "confirmed"
+          }
+        ]
+      },
+      "category": [
+        {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+              "code": "problem-list-item",
+              "display": "Problem List Item"
+            }
+          ]
+        }
+      ],
+      "code": {
+        "coding": [
+          {
+            "system": "http://snomed.info/sct",
+            "code": "55822004",
+            "display": "Hyperlipidemia"
+          }
+        ],
+        "text": "Hyperlipidemia"
+      },
+      "subject": {
+        "reference": "Patient/example"
+      },
+      "onsetDateTime": "2016-11-08"
+    }
+  ],
+  "MedicationRequest": [
+    {
+      "resourceType": "MedicationRequest",
+      "id": "med-metformin",
+      "status": "active",
+      "intent": "order",
+      "medicationCodeableConcept": {
+        "coding": [
+          {
+            "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            "code": "861007",
+            "display": "Metformin hydrochloride 1000 MG"
+          }
+        ],
+        "text": "Metformin 1000 mg"
+      },
+      "subject": {
+        "reference": "Patient/example"
+      },
+      "authoredOn": "2024-12-01",
+      "dosageInstruction": [
+        {
+          "text": "1000 mg orally twice daily"
+        }
+      ]
+    },
+    {
+      "resourceType": "MedicationRequest",
+      "id": "med-lisinopril",
+      "status": "active",
+      "intent": "order",
+      "medicationCodeableConcept": {
+        "coding": [
+          {
+            "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            "code": "314077",
+            "display": "Lisinopril 20 MG"
+          }
+        ],
+        "text": "Lisinopril 20 mg"
+      },
+      "subject": {
+        "reference": "Patient/example"
+      },
+      "authoredOn": "2024-12-01",
+      "dosageInstruction": [
+        {
+          "text": "20 mg orally once daily"
+        }
+      ]
+    },
+    {
+      "resourceType": "MedicationRequest",
+      "id": "med-atorvastatin",
+      "status": "active",
+      "intent": "order",
+      "medicationCodeableConcept": {
+        "coding": [
+          {
+            "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            "code": "617312",
+            "display": "Atorvastatin 40 MG"
+          }
+        ],
+        "text": "Atorvastatin 40 mg"
+      },
+      "subject": {
+        "reference": "Patient/example"
+      },
+      "authoredOn": "2024-12-01",
+      "dosageInstruction": [
+        {
+          "text": "40 mg orally once daily at bedtime"
+        }
+      ]
+    }
+  ],
+  "AllergyIntolerance": [
+    {
+      "resourceType": "AllergyIntolerance",
+      "id": "allergy-penicillin",
+      "clinicalStatus": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical",
+            "code": "active"
+          }
+        ]
+      },
+      "type": "allergy",
+      "criticality": "high",
+      "code": {
+        "coding": [
+          {
+            "system": "http://snomed.info/sct",
+            "code": "373270004",
+            "display": "Penicillin"
+          }
+        ],
+        "text": "Penicillin"
+      },
+      "patient": {
+        "reference": "Patient/example"
+      },
+      "recordedDate": "2019-08-22"
+    }
+  ],
+  "Observation": [
+    {
+      "resourceType": "Observation",
+      "id": "obs-a1c",
+      "status": "final",
+      "category": [
+        {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+              "code": "laboratory"
+            }
+          ]
+        }
+      ],
+      "code": {
+        "coding": [
+          {
+            "system": "http://loinc.org",
+            "code": "4548-4",
+            "display": "Hemoglobin A1c"
+          }
+        ],
+        "text": "Hemoglobin A1c"
+      },
+      "subject": {
+        "reference": "Patient/example"
+      },
+      "effectiveDateTime": "2026-05-19",
+      "valueQuantity": {
+        "value": 8.2,
+        "unit": "%",
+        "system": "http://unitsofmeasure.org",
+        "code": "%"
+      },
+      "interpretation": [
+        {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+              "code": "H"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "resourceType": "Observation",
+      "id": "obs-egfr",
+      "status": "final",
+      "category": [
+        {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+              "code": "laboratory"
+            }
+          ]
+        }
+      ],
+      "code": {
+        "coding": [
+          {
+            "system": "http://loinc.org",
+            "code": "33914-3",
+            "display": "eGFR"
+          }
+        ],
+        "text": "Estimated GFR"
+      },
+      "subject": {
+        "reference": "Patient/example"
+      },
+      "effectiveDateTime": "2026-05-19",
+      "valueQuantity": {
+        "value": 48,
+        "unit": "mL/min/1.73m2",
+        "system": "http://unitsofmeasure.org",
+        "code": "mL/min/{1.73_m2}"
+      },
+      "interpretation": [
+        {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+              "code": "L"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "resourceType": "Observation",
+      "id": "obs-ldl",
+      "status": "final",
+      "category": [
+        {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+              "code": "laboratory"
+            }
+          ]
+        }
+      ],
+      "code": {
+        "coding": [
+          {
+            "system": "http://loinc.org",
+            "code": "18262-6",
+            "display": "LDL cholesterol"
+          }
+        ],
+        "text": "LDL cholesterol"
+      },
+      "subject": {
+        "reference": "Patient/example"
+      },
+      "effectiveDateTime": "2026-05-19",
+      "valueQuantity": {
+        "value": 118,
+        "unit": "mg/dL",
+        "system": "http://unitsofmeasure.org",
+        "code": "mg/dL"
+      },
+      "interpretation": [
+        {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+              "code": "H"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "resourceType": "Observation",
+      "id": "obs-bp",
+      "status": "final",
+      "category": [
+        {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+              "code": "vital-signs"
+            }
+          ]
+        }
+      ],
+      "code": {
+        "coding": [
+          {
+            "system": "http://loinc.org",
+            "code": "85354-9",
+            "display": "Blood pressure"
+          }
+        ],
+        "text": "Blood pressure"
+      },
+      "subject": {
+        "reference": "Patient/example"
+      },
+      "effectiveDateTime": "2026-05-19",
+      "valueQuantity": {
+        "value": 148,
+        "unit": "mmHg systolic",
+        "system": "http://unitsofmeasure.org",
+        "code": "mm[Hg]"
+      },
+      "interpretation": [
+        {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+              "code": "H"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "resourceType": "Observation",
+      "id": "obs-weight",
+      "status": "final",
+      "category": [
+        {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+              "code": "vital-signs"
+            }
+          ]
+        }
+      ],
+      "code": {
+        "coding": [
+          {
+            "system": "http://loinc.org",
+            "code": "29463-7",
+            "display": "Body weight"
+          }
+        ],
+        "text": "Body weight"
+      },
+      "subject": {
+        "reference": "Patient/example"
+      },
+      "effectiveDateTime": "2026-05-19",
+      "valueQuantity": {
+        "value": 81.2,
+        "unit": "kg",
+        "system": "http://unitsofmeasure.org",
+        "code": "kg"
+      }
+    }
+  ],
+  "Encounter": [
+    {
+      "resourceType": "Encounter",
+      "id": "enc-pcp",
+      "status": "finished",
+      "class": {
+        "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+        "code": "AMB",
+        "display": "ambulatory"
+      },
+      "type": [
+        {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "185349003",
+              "display": "Primary care follow-up"
+            }
+          ],
+          "text": "Primary care follow-up"
+        }
+      ],
+      "subject": {
+        "reference": "Patient/example"
+      },
+      "period": {
+        "start": "2026-02-10",
+        "end": "2026-02-10"
+      }
+    },
+    {
+      "resourceType": "Encounter",
+      "id": "enc-admit",
+      "status": "finished",
+      "class": {
+        "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+        "code": "IMP",
+        "display": "inpatient"
+      },
+      "type": [
+        {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "32485007",
+              "display": "Hospital admission"
+            }
+          ],
+          "text": "Inpatient admission"
+        }
+      ],
+      "subject": {
+        "reference": "Patient/example"
+      },
+      "period": {
+        "start": "2026-05-18",
+        "end": "2026-05-22"
+      }
+    }
+  ],
+  "DocumentReference": []
+}
