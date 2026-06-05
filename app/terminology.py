@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-CODES_PATH = Path(__file__).resolve().parent.parent / "data" / "condition_codes.json"
+CODES_PATH = Path(__file__).resolve().parents[1] / "data" / "condition_codes.json"
 
 
 def list_codes() -> list[dict]:
@@ -9,12 +9,12 @@ def list_codes() -> list[dict]:
 
 
 def search_codes(query: str) -> list[dict]:
-    q = query.lower().strip()
-    if not q:
+    needle = query.lower().strip()
+    if not needle:
         return list_codes()
     matches = []
     for code in list_codes():
-        haystack = " ".join([code["display"], *code.get("keywords", [])]).lower()
-        if q in haystack:
+        haystack = " ".join([code.get("display", ""), *code.get("synonyms", [])]).lower()
+        if needle in haystack:
             matches.append(code)
     return matches

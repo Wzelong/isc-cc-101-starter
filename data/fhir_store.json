@@ -1,50 +1,144 @@
 {
-  "Patient": {
-    "resourceType": "Patient",
-    "id": "example",
-    "identifier": [
-      {
-        "type": {
-          "coding": [
-            {
-              "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
-              "code": "MR"
-            }
+  "Patient": [
+    {
+      "resourceType": "Patient",
+      "id": "maria",
+      "identifier": [
+        {
+          "type": {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                "code": "MR"
+              }
+            ]
+          },
+          "system": "urn:oid:1.2.36.146.595.217.0.1",
+          "value": "BAY-0117-ROM"
+        }
+      ],
+      "name": [
+        {
+          "use": "official",
+          "family": "Romero",
+          "given": [
+            "Maria"
           ]
-        },
-        "system": "urn:oid:1.2.36.146.595.217.0.1",
-        "value": "BAY-0117-ROM"
-      }
-    ],
-    "name": [
-      {
-        "use": "official",
-        "family": "Romero",
-        "given": [
-          "Maria"
-        ]
-      }
-    ],
-    "gender": "female",
-    "birthDate": "1958-03-14",
-    "address": [
-      {
-        "line": [
-          "482 Larkspur Ave"
-        ],
-        "city": "Riverside",
-        "state": "CA",
-        "postalCode": "92501"
-      }
-    ],
-    "telecom": [
-      {
-        "system": "phone",
-        "value": "+1-951-555-0142",
-        "use": "home"
-      }
-    ]
-  },
+        }
+      ],
+      "gender": "female",
+      "birthDate": "1958-03-14",
+      "address": [
+        {
+          "line": [
+            "482 Larkspur Ave"
+          ],
+          "city": "Riverside",
+          "state": "CA",
+          "postalCode": "92501"
+        }
+      ],
+      "telecom": [
+        {
+          "system": "phone",
+          "value": "+1-951-555-0142",
+          "use": "home"
+        }
+      ]
+    },
+    {
+      "resourceType": "Patient",
+      "id": "james",
+      "identifier": [
+        {
+          "type": {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                "code": "MR"
+              }
+            ]
+          },
+          "system": "urn:oid:1.2.36.146.595.217.0.1",
+          "value": "BAY-0204-LEE"
+        }
+      ],
+      "name": [
+        {
+          "use": "official",
+          "family": "Lee",
+          "given": [
+            "James"
+          ]
+        }
+      ],
+      "gender": "male",
+      "birthDate": "1954-11-15",
+      "address": [
+        {
+          "line": [
+            "19 Cedar Court"
+          ],
+          "city": "Riverside",
+          "state": "CA",
+          "postalCode": "92503"
+        }
+      ],
+      "telecom": [
+        {
+          "system": "phone",
+          "value": "+1-951-555-0188",
+          "use": "home"
+        }
+      ]
+    },
+    {
+      "resourceType": "Patient",
+      "id": "priya",
+      "identifier": [
+        {
+          "type": {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                "code": "MR"
+              }
+            ]
+          },
+          "system": "urn:oid:1.2.36.146.595.217.0.1",
+          "value": "BAY-0339-ANA"
+        }
+      ],
+      "name": [
+        {
+          "use": "official",
+          "family": "Anand",
+          "given": [
+            "Priya"
+          ]
+        }
+      ],
+      "gender": "female",
+      "birthDate": "1971-07-09",
+      "address": [
+        {
+          "line": [
+            "77 Juniper Way"
+          ],
+          "city": "Riverside",
+          "state": "CA",
+          "postalCode": "92505"
+        }
+      ],
+      "telecom": [
+        {
+          "system": "phone",
+          "value": "+1-951-555-0207",
+          "use": "home"
+        }
+      ]
+    }
+  ],
   "Condition": [
     {
       "resourceType": "Condition",
@@ -87,7 +181,7 @@
         "text": "Type 2 diabetes mellitus"
       },
       "subject": {
-        "reference": "Patient/example"
+        "reference": "Patient/maria"
       },
       "onsetDateTime": "2015-06-02"
     },
@@ -132,7 +226,7 @@
         "text": "Essential hypertension"
       },
       "subject": {
-        "reference": "Patient/example"
+        "reference": "Patient/maria"
       },
       "onsetDateTime": "2017-03-19"
     },
@@ -177,9 +271,144 @@
         "text": "Hyperlipidemia"
       },
       "subject": {
-        "reference": "Patient/example"
+        "reference": "Patient/maria"
       },
       "onsetDateTime": "2016-11-08"
+    },
+    {
+      "resourceType": "Condition",
+      "id": "cond-angina",
+      "clinicalStatus": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+            "code": "active"
+          }
+        ]
+      },
+      "verificationStatus": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+            "code": "confirmed"
+          }
+        ]
+      },
+      "category": [
+        {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+              "code": "problem-list-item",
+              "display": "Problem List Item"
+            }
+          ]
+        }
+      ],
+      "code": {
+        "coding": [
+          {
+            "system": "http://snomed.info/sct",
+            "code": "194828000",
+            "display": "Angina pectoris"
+          }
+        ],
+        "text": "Angina pectoris"
+      },
+      "subject": {
+        "reference": "Patient/james"
+      },
+      "onsetDateTime": "2021-09-12"
+    },
+    {
+      "resourceType": "Condition",
+      "id": "cond-htn-j",
+      "clinicalStatus": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+            "code": "active"
+          }
+        ]
+      },
+      "verificationStatus": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+            "code": "confirmed"
+          }
+        ]
+      },
+      "category": [
+        {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+              "code": "problem-list-item",
+              "display": "Problem List Item"
+            }
+          ]
+        }
+      ],
+      "code": {
+        "coding": [
+          {
+            "system": "http://snomed.info/sct",
+            "code": "59621000",
+            "display": "Essential hypertension"
+          }
+        ],
+        "text": "Essential hypertension"
+      },
+      "subject": {
+        "reference": "Patient/james"
+      },
+      "onsetDateTime": "2018-01-22"
+    },
+    {
+      "resourceType": "Condition",
+      "id": "cond-asthma",
+      "clinicalStatus": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+            "code": "active"
+          }
+        ]
+      },
+      "verificationStatus": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+            "code": "confirmed"
+          }
+        ]
+      },
+      "category": [
+        {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+              "code": "problem-list-item",
+              "display": "Problem List Item"
+            }
+          ]
+        }
+      ],
+      "code": {
+        "coding": [
+          {
+            "system": "http://snomed.info/sct",
+            "code": "195967001",
+            "display": "Asthma"
+          }
+        ],
+        "text": "Asthma"
+      },
+      "subject": {
+        "reference": "Patient/priya"
+      },
+      "onsetDateTime": "2009-05-30"
     }
   ],
   "MedicationRequest": [
@@ -199,7 +428,7 @@
         "text": "Metformin 1000 mg"
       },
       "subject": {
-        "reference": "Patient/example"
+        "reference": "Patient/maria"
       },
       "authoredOn": "2024-12-01",
       "dosageInstruction": [
@@ -224,7 +453,7 @@
         "text": "Lisinopril 20 mg"
       },
       "subject": {
-        "reference": "Patient/example"
+        "reference": "Patient/maria"
       },
       "authoredOn": "2024-12-01",
       "dosageInstruction": [
@@ -249,12 +478,87 @@
         "text": "Atorvastatin 40 mg"
       },
       "subject": {
-        "reference": "Patient/example"
+        "reference": "Patient/maria"
       },
       "authoredOn": "2024-12-01",
       "dosageInstruction": [
         {
           "text": "40 mg orally once daily at bedtime"
+        }
+      ]
+    },
+    {
+      "resourceType": "MedicationRequest",
+      "id": "med-metoprolol",
+      "status": "active",
+      "intent": "order",
+      "medicationCodeableConcept": {
+        "coding": [
+          {
+            "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            "code": "866924",
+            "display": "Metoprolol tartrate 50 MG"
+          }
+        ],
+        "text": "Metoprolol 50 mg"
+      },
+      "subject": {
+        "reference": "Patient/james"
+      },
+      "authoredOn": "2025-01-15",
+      "dosageInstruction": [
+        {
+          "text": "50 mg orally twice daily"
+        }
+      ]
+    },
+    {
+      "resourceType": "MedicationRequest",
+      "id": "med-aspirin",
+      "status": "active",
+      "intent": "order",
+      "medicationCodeableConcept": {
+        "coding": [
+          {
+            "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            "code": "243670",
+            "display": "Aspirin 81 MG"
+          }
+        ],
+        "text": "Aspirin 81 mg"
+      },
+      "subject": {
+        "reference": "Patient/james"
+      },
+      "authoredOn": "2025-01-15",
+      "dosageInstruction": [
+        {
+          "text": "81 mg orally once daily"
+        }
+      ]
+    },
+    {
+      "resourceType": "MedicationRequest",
+      "id": "med-fluticasone",
+      "status": "active",
+      "intent": "order",
+      "medicationCodeableConcept": {
+        "coding": [
+          {
+            "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+            "code": "895994",
+            "display": "Fluticasone propionate 110 UG/ACTUAT"
+          }
+        ],
+        "text": "Fluticasone inhaler"
+      },
+      "subject": {
+        "reference": "Patient/priya"
+      },
+      "authoredOn": "2025-02-20",
+      "dosageInstruction": [
+        {
+          "text": "2 puffs inhaled twice daily"
         }
       ]
     }
@@ -284,9 +588,37 @@
         "text": "Penicillin"
       },
       "patient": {
-        "reference": "Patient/example"
+        "reference": "Patient/maria"
       },
       "recordedDate": "2019-08-22"
+    },
+    {
+      "resourceType": "AllergyIntolerance",
+      "id": "allergy-sulfa",
+      "clinicalStatus": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical",
+            "code": "active"
+          }
+        ]
+      },
+      "type": "allergy",
+      "criticality": "low",
+      "code": {
+        "coding": [
+          {
+            "system": "http://snomed.info/sct",
+            "code": "387406002",
+            "display": "Sulfonamide"
+          }
+        ],
+        "text": "Sulfonamide"
+      },
+      "patient": {
+        "reference": "Patient/james"
+      },
+      "recordedDate": "2016-06-04"
     }
   ],
   "Observation": [
@@ -315,7 +647,7 @@
         "text": "Hemoglobin A1c"
       },
       "subject": {
-        "reference": "Patient/example"
+        "reference": "Patient/maria"
       },
       "effectiveDateTime": "2026-05-19",
       "valueQuantity": {
@@ -360,7 +692,7 @@
         "text": "Estimated GFR"
       },
       "subject": {
-        "reference": "Patient/example"
+        "reference": "Patient/maria"
       },
       "effectiveDateTime": "2026-05-19",
       "valueQuantity": {
@@ -405,7 +737,7 @@
         "text": "LDL cholesterol"
       },
       "subject": {
-        "reference": "Patient/example"
+        "reference": "Patient/maria"
       },
       "effectiveDateTime": "2026-05-19",
       "valueQuantity": {
@@ -450,7 +782,7 @@
         "text": "Blood pressure"
       },
       "subject": {
-        "reference": "Patient/example"
+        "reference": "Patient/maria"
       },
       "effectiveDateTime": "2026-05-19",
       "valueQuantity": {
@@ -495,7 +827,7 @@
         "text": "Body weight"
       },
       "subject": {
-        "reference": "Patient/example"
+        "reference": "Patient/maria"
       },
       "effectiveDateTime": "2026-05-19",
       "valueQuantity": {
@@ -503,6 +835,131 @@
         "unit": "kg",
         "system": "http://unitsofmeasure.org",
         "code": "kg"
+      }
+    },
+    {
+      "resourceType": "Observation",
+      "id": "obs-ldl-j",
+      "status": "final",
+      "category": [
+        {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+              "code": "laboratory"
+            }
+          ]
+        }
+      ],
+      "code": {
+        "coding": [
+          {
+            "system": "http://loinc.org",
+            "code": "18262-6",
+            "display": "LDL cholesterol"
+          }
+        ],
+        "text": "LDL cholesterol"
+      },
+      "subject": {
+        "reference": "Patient/james"
+      },
+      "effectiveDateTime": "2026-02-28",
+      "valueQuantity": {
+        "value": 134,
+        "unit": "mg/dL",
+        "system": "http://unitsofmeasure.org",
+        "code": "mg/dL"
+      },
+      "interpretation": [
+        {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+              "code": "H"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "resourceType": "Observation",
+      "id": "obs-bp-j",
+      "status": "final",
+      "category": [
+        {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+              "code": "vital-signs"
+            }
+          ]
+        }
+      ],
+      "code": {
+        "coding": [
+          {
+            "system": "http://loinc.org",
+            "code": "85354-9",
+            "display": "Blood pressure"
+          }
+        ],
+        "text": "Blood pressure"
+      },
+      "subject": {
+        "reference": "Patient/james"
+      },
+      "effectiveDateTime": "2026-02-28",
+      "valueQuantity": {
+        "value": 150,
+        "unit": "mmHg systolic",
+        "system": "http://unitsofmeasure.org",
+        "code": "mm[Hg]"
+      },
+      "interpretation": [
+        {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+              "code": "H"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "resourceType": "Observation",
+      "id": "obs-fev1",
+      "status": "final",
+      "category": [
+        {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+              "code": "laboratory"
+            }
+          ]
+        }
+      ],
+      "code": {
+        "coding": [
+          {
+            "system": "http://loinc.org",
+            "code": "20150-9",
+            "display": "FEV1"
+          }
+        ],
+        "text": "FEV1"
+      },
+      "subject": {
+        "reference": "Patient/priya"
+      },
+      "effectiveDateTime": "2026-04-18",
+      "valueQuantity": {
+        "value": 2.6,
+        "unit": "L",
+        "system": "http://unitsofmeasure.org",
+        "code": "L"
       }
     }
   ],
@@ -529,7 +986,7 @@
         }
       ],
       "subject": {
-        "reference": "Patient/example"
+        "reference": "Patient/maria"
       },
       "period": {
         "start": "2026-02-10",
@@ -551,20 +1008,142 @@
             {
               "system": "http://snomed.info/sct",
               "code": "32485007",
-              "display": "Hospital admission"
+              "display": "Inpatient admission"
             }
           ],
           "text": "Inpatient admission"
         }
       ],
       "subject": {
-        "reference": "Patient/example"
+        "reference": "Patient/maria"
       },
       "period": {
         "start": "2026-05-18",
         "end": "2026-05-22"
       }
+    },
+    {
+      "resourceType": "Encounter",
+      "id": "enc-cards",
+      "status": "finished",
+      "class": {
+        "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+        "code": "AMB",
+        "display": "ambulatory"
+      },
+      "type": [
+        {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "185349003",
+              "display": "Cardiology consultation"
+            }
+          ],
+          "text": "Cardiology consultation"
+        }
+      ],
+      "subject": {
+        "reference": "Patient/james"
+      },
+      "period": {
+        "start": "2026-03-04",
+        "end": "2026-03-04"
+      }
+    },
+    {
+      "resourceType": "Encounter",
+      "id": "enc-pulm",
+      "status": "finished",
+      "class": {
+        "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+        "code": "AMB",
+        "display": "ambulatory"
+      },
+      "type": [
+        {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "185349003",
+              "display": "Pulmonary follow-up"
+            }
+          ],
+          "text": "Pulmonary follow-up"
+        }
+      ],
+      "subject": {
+        "reference": "Patient/priya"
+      },
+      "period": {
+        "start": "2026-04-18",
+        "end": "2026-04-18"
+      }
     }
   ],
-  "DocumentReference": []
+  "DocumentReference": [
+    {
+      "resourceType": "DocumentReference",
+      "id": "doc-seed-maria",
+      "status": "current",
+      "type": {
+        "text": "PCP follow-up note"
+      },
+      "subject": {
+        "reference": "Patient/maria"
+      },
+      "date": "2026-02-10T16:00:00+00:00",
+      "content": [
+        {
+          "attachment": {
+            "contentType": "text/plain",
+            "title": "PCP follow-up note",
+            "data": "UFJJTUFSWSBDQVJFIEZPTExPVy1VUCDigJQgMjAyNi0wMi0xMApNYXJpYSBSb21lcm8sIDY3Ri4gVHlwZSAyIGRpYWJldGVzLCBoeXBlcnRlbnNpb24sIGh5cGVybGlwaWRlbWlhIOKAlCBzdGFibGUgb24KbWV0Zm9ybWluLCBsaXNpbm9wcmlsLCBhdG9ydmFzdGF0aW4uIEExYyB0cmVuZGluZyB1cDsgcmVpbmZvcmNlZCBkaWV0IGFuZAphZGhlcmVuY2UuIEJQIDE0Mi84NiBpbiBjbGluaWMuIENvbnRpbnVlIGN1cnJlbnQgcmVnaW1lbiwgcmVjaGVjayBsYWJzIGluIDMgbW9udGhzLgo="
+          }
+        }
+      ]
+    },
+    {
+      "resourceType": "DocumentReference",
+      "id": "doc-seed-james",
+      "status": "current",
+      "type": {
+        "text": "Cardiology consult note"
+      },
+      "subject": {
+        "reference": "Patient/james"
+      },
+      "date": "2026-03-04T15:30:00+00:00",
+      "content": [
+        {
+          "attachment": {
+            "contentType": "text/plain",
+            "title": "Cardiology consult note",
+            "data": "Q0FSRElPTE9HWSBDT05TVUxUIOKAlCAyMDI2LTAzLTA0CkphbWVzIExlZSwgNzFNLiBTdGFibGUgYW5naW5hIG9uIGV4ZXJ0aW9uLCBoeXBlcnRlbnNpb24uIE9uIG1ldG9wcm9sb2wgYW5kCmFzcGlyaW4uIFN0cmVzcyB0ZXN0IHNjaGVkdWxlZC4gTERMIGFib3ZlIGdvYWwg4oCUIGF0b3J2YXN0YXRpbiB1cHRpdHJhdGVkLgpDb3Vuc2VsZWQgb24gc3ltcHRvbSBkaWFyeSBhbmQgd2hlbiB0byBzZWVrIGNhcmUuCg=="
+          }
+        }
+      ]
+    },
+    {
+      "resourceType": "DocumentReference",
+      "id": "doc-seed-priya",
+      "status": "current",
+      "type": {
+        "text": "Pulmonary follow-up note"
+      },
+      "subject": {
+        "reference": "Patient/priya"
+      },
+      "date": "2026-04-18T14:00:00+00:00",
+      "content": [
+        {
+          "attachment": {
+            "contentType": "text/plain",
+            "title": "Pulmonary follow-up note",
+            "data": "UFVMTU9OQVJZIEZPTExPVy1VUCDigJQgMjAyNi0wNC0xOApQcml5YSBBbmFuZCwgNTRGLiBQZXJzaXN0ZW50IGFzdGhtYSwgd2VsbCBjb250cm9sbGVkIG9uIGluaGFsZWQgY29ydGljb3N0ZXJvaWQuClJlcG9ydHMgb2NjYXNpb25hbCBub2N0dXJuYWwgc3ltcHRvbXM7IHJldmlld2VkIGluaGFsZXIgdGVjaG5pcXVlLiBTcGlyb21ldHJ5CnN0YWJsZS4gQ29udGludWUgbWFpbnRlbmFuY2UgdGhlcmFweSwgZm9sbG93IHVwIGluIDYgbW9udGhzLgo="
+          }
+        }
+      ]
+    }
+  ]
 }

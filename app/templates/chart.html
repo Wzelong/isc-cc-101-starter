@@ -170,18 +170,20 @@
           <svg class="ic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
           <input type="search" placeholder="Search patients…">
         </div>
-        <a class="iconbtn" href="/" title="Reload">
+        <a class="iconbtn" href="/patients/{{ active_id }}" title="Reload">
           <svg class="ic" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg>
         </a>
       </div>
       <div class="list-items">
-        <a class="pt-row active" href="/">
+        {% for p in patients %}
+        <a class="pt-row{% if p.id == active_id %} active{% endif %}" href="/patients/{{ p.id }}">
           <div class="pt-top">
-            <span class="pt-name">{{ header.name }}</span>
-            <span class="badge">Active</span>
+            <span class="pt-name">{{ p.name }}</span>
+            {% if p.id == active_id %}<span class="badge">Active</span>{% endif %}
           </div>
-          <div class="pt-sub">{{ header.ident }}</div>
+          <div class="pt-sub">{{ p.ident }}</div>
         </a>
+        {% endfor %}
       </div>
     </aside>
 
@@ -224,7 +226,7 @@
       <div class="card">
         <h3>Add clinical note</h3>
         {% if error %}<div class="upload-err">Upload failed — <code>{{ error }}</code></div>{% endif %}
-        <form class="upload-drop" action="/documents" method="post" enctype="multipart/form-data">
+        <form class="upload-drop" action="/patients/{{ active_id }}/documents" method="post" enctype="multipart/form-data">
           <svg class="ic" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
           <p>Upload a .txt note to this chart</p>
           <label class="file-pick empty">
@@ -271,7 +273,7 @@
         </div>
         <div class="code-list" id="code-list">
           {% for c in codes %}
-          <div class="code-row" data-k="{{ c.display }} {{ c.keywords | join(' ') }}" title="{{ c.display }} · SNOMED {{ c.snomed }} · ICD-10 {{ c.icd10 }}">
+          <div class="code-row" data-k="{{ c.display }} {{ c.synonyms | join(' ') }}" title="{{ c.display }} · SNOMED {{ c.snomed }} · ICD-10 {{ c.icd10 }}">
             <span class="code-name">{{ c.display }}</span>
             <span class="code-id">{{ c.icd10 }}</span>
           </div>

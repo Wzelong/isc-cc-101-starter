@@ -1,0 +1,10 @@
+{
+  "note_file": "discharge-summary.txt",
+  "patient_id": "maria",
+  "findings": [
+    { "condition": "Chronic kidney disease, stage 3", "status": "present", "icd10": "N18.30" },
+    { "condition": "Diabetic polyneuropathy", "status": "present", "icd10": "E11.42" },
+    { "condition": "Diabetic retinopathy", "status": "negated", "icd10": "E11.319" },
+    { "condition": "Type 2 diabetes mellitus", "status": "duplicate", "icd10": "E11.9" }
+  ]
+}
