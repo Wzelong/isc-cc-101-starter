@@ -149,6 +149,14 @@
       border: 1px solid oklch(0.88 0.04 25); border-radius: 8px; padding: 8px 10px; margin-bottom: 10px;
     }
     .upload-err code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .upload-ok {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12px; color: oklch(0.45 0.1 150); background: oklch(0.97 0.025 150);
+      border: 1px solid oklch(0.88 0.05 150); border-radius: 8px; padding: 8px 10px; margin-bottom: 10px;
+      transition: opacity .4s ease;
+    }
+    .upload-ok .ic { width: 14px; height: 14px; }
+    .upload-ok code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   </style>
 </head>
 <body>
@@ -226,6 +234,12 @@
       <div class="card">
         <h3>Add clinical note</h3>
         {% if error %}<div class="upload-err">Upload failed — <code>{{ error }}</code></div>{% endif %}
+        {% if uploaded %}
+        <div class="upload-ok">
+          <svg class="ic" viewBox="0 0 24 24"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg>
+          <span>Uploaded <code>{{ uploaded }}</code></span>
+        </div>
+        {% endif %}
         <form class="upload-drop" action="/patients/{{ active_id }}/documents" method="post" enctype="multipart/form-data">
           <svg class="ic" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
           <p>Upload a .txt note to this chart</p>
@@ -233,7 +247,7 @@
             <input type="file" name="file" accept=".txt" required>
             <span>Choose a .txt note…</span>
           </label>
-          <button class="btn-primary" type="submit">Upload note</button>
+          <button class="btn-primary" type="submit" hidden>Upload note</button>
         </form>
       </div>
 
@@ -285,12 +299,24 @@
   </div>
   <script>
     const pick = document.querySelector(".file-pick")
+    const uploadBtn = document.querySelector(".upload-drop .btn-primary")
     pick.querySelector("input").addEventListener("change", (e) => {
       const name = e.target.files[0]?.name
       pick.querySelector("span").textContent = name || "Choose a .txt note…"
       pick.classList.toggle("empty", !name)
+      uploadBtn.hidden = !name
       document.querySelector(".upload-err")?.remove()
+      document.querySelector(".upload-ok")?.remove()
     })
+
+    const ok = document.querySelector(".upload-ok")
+    if (ok) {
+      history.replaceState(null, "", location.pathname)
+      setTimeout(() => {
+        ok.style.opacity = "0"
+        setTimeout(() => ok.remove(), 400)
+      }, 4000)
+    }
 
     const codeQ = document.getElementById("code-q")
     const codeRows = [...document.querySelectorAll("#code-list .code-row")]

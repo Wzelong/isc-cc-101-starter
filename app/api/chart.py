@@ -17,7 +17,12 @@ def index():
 
 
 @router.get("/patients/{patient_id}", response_class=HTMLResponse)
-def chart(request: Request, patient_id: str, error: str | None = None):
+def chart(
+    request: Request,
+    patient_id: str,
+    error: str | None = None,
+    uploaded: str | None = None,
+):
     header = chart_service.patient_header(patient_id)
     if not header:
         return RedirectResponse(f"/patients/{DEFAULT_PATIENT}")
@@ -32,5 +37,6 @@ def chart(request: Request, patient_id: str, error: str | None = None):
             "patients": chart_service.patient_summaries(),
             "active_id": patient_id,
             "error": error,
+            "uploaded": uploaded,
         },
     )

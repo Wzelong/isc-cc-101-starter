@@ -1,3 +1,5 @@
+from urllib.parse import quote
+
 from fastapi import APIRouter, File, UploadFile
 from fastapi.responses import RedirectResponse
 
@@ -10,4 +12,7 @@ router = APIRouter()
 async def upload(patient_id: str, file: UploadFile = File(...)):
     raw = (await file.read()).decode("utf-8")
     notes_service.upload_note(patient_id, file.filename, raw)
-    return RedirectResponse(f"/patients/{patient_id}", status_code=303)
+    return RedirectResponse(
+        f"/patients/{patient_id}?uploaded={quote(file.filename or 'note')}",
+        status_code=303,
+    )

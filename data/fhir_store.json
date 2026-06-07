@@ -1144,6 +1144,69 @@
           }
         }
       ]
+    },
+    {
+      "resourceType": "DocumentReference",
+      "id": "doc-dfb0639c",
+      "status": "current",
+      "type": {
+        "text": "test-note.txt"
+      },
+      "subject": {
+        "reference": "urn:uuid:maria"
+      },
+      "date": "2026-06-07T12:35:17.664200+00:00",
+      "content": [
+        {
+          "attachment": {
+            "contentType": "text/plain",
+            "title": "test-note.txt",
+            "data": "VGVzdCBub3RlIGNvbnRlbnQuCg=="
+          }
+        }
+      ]
+    },
+    {
+      "resourceType": "DocumentReference",
+      "id": "doc-53f7de4a",
+      "status": "current",
+      "type": {
+        "text": "atomic-note.txt"
+      },
+      "subject": {
+        "reference": "urn:uuid:maria"
+      },
+      "date": "2026-06-07T12:36:16.115540+00:00",
+      "content": [
+        {
+          "attachment": {
+            "contentType": "text/plain",
+            "title": "atomic-note.txt",
+            "data": "QXRvbWljIHdyaXRlIGNoZWNrLgo="
+          }
+        }
+      ]
+    },
+    {
+      "resourceType": "DocumentReference",
+      "id": "doc-3981fdd5",
+      "status": "current",
+      "type": {
+        "text": "discharge-summary.txt"
+      },
+      "subject": {
+        "reference": "urn:uuid:maria"
+      },
+      "date": "2026-06-07T12:50:57.378723+00:00",
+      "content": [
+        {
+          "attachment": {
+            "contentType": "text/plain",
+            "title": "discharge-summary.txt",
+            "data": "RElTQ0hBUkdFIFNVTU1BUlkKClBhdGllbnQ6IE1hcmlhIFJvbWVybyAgICAgICAgRE9COiAxOTU4LTAzLTE0CkFkbWl0OiAyMDI2LTA1LTE4ICAgICAgICAgICBEaXNjaGFyZ2U6IDIwMjYtMDUtMjIKClJFQVNPTiBGT1IgQURNSVNTSU9OCjY3LXllYXItb2xkIHdvbWFuIHdpdGggbG9uZy1zdGFuZGluZyB0eXBlIDIgZGlhYmV0ZXMgbWVsbGl0dXMgYWRtaXR0ZWQgZm9yCmV2YWx1YXRpb24gb2Ygd29yc2VuaW5nIGxvd2VyLWV4dHJlbWl0eSBzd2VsbGluZyBhbmQgZmF0aWd1ZS4KCkhPU1BJVEFMIENPVVJTRQpMYWJvcmF0b3J5IHdvcmt1cCBzaG93ZWQgYW4gZXN0aW1hdGVkIEdGUiBvZiA0OCBtTC9taW4vMS43M20yIHdpdGggbW9kZXJhdGUKYWxidW1pbnVyaWEgb24gYSBiYWNrZ3JvdW5kIG9mIGRpYWJldGVzLiBSZW5hbCB1bHRyYXNvdW5kIHdhcyB1bnJlbWFya2FibGUuCk5lcGhyb2xvZ3kgd2FzIGNvbnN1bHRlZCBhbmQgcmVjb21tZW5kZWQgQUNFLWluaGliaXRvciB0aXRyYXRpb24gd2l0aCBhIHJlcGVhdApyZW5hbCBwYW5lbCBpbiB0aHJlZSBtb250aHMuCgpUaGUgcGF0aWVudCBhbHNvIHJlcG9ydGVkIHNldmVyYWwgbW9udGhzIG9mIGJ1cm5pbmcgYW5kIG51bWJuZXNzIGluIGJvdGggZmVldC4KTW9ub2ZpbGFtZW50IHRlc3RpbmcgZGVtb25zdHJhdGVkIHJlZHVjZWQgc2Vuc2F0aW9uIGJpbGF0ZXJhbGx5LiBHYWJhcGVudGluIHdhcwpzdGFydGVkIHdpdGggZ29vZCBzeW1wdG9tYXRpYyByZWxpZWYuCgpBIGRpbGF0ZWQgcmV0aW5hbCBleGFtaW5hdGlvbiBkdXJpbmcgdGhpcyBhZG1pc3Npb24gd2FzIHVucmVtYXJrYWJsZS4KCkRJU0NIQVJHRSBNRURJQ0FUSU9OUwpNZXRmb3JtaW4sIGxpc2lub3ByaWwsIGF0b3J2YXN0YXRpbiwgZ2FiYXBlbnRpbi4KCkZPTExPVy1VUApQcmltYXJ5IGNhcmUgaW4gMiB3ZWVrcy4gTmVwaHJvbG9neSBpbiAzIG1vbnRocy4K"
+          }
+        }
+      ]
     }
   ]
 }

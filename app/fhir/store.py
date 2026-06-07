@@ -1,4 +1,5 @@
 import json
+import os
 from datetime import datetime, timezone
 from pathlib import Path
 from secrets import token_hex
@@ -11,7 +12,9 @@ def load() -> dict:
 
 
 def save(store: dict) -> None:
-    STORE_PATH.write_text(json.dumps(store, indent=2), encoding="utf-8")
+    tmp_path = STORE_PATH.with_suffix(".json.tmp")
+    tmp_path.write_text(json.dumps(store, indent=2), encoding="utf-8")
+    os.replace(tmp_path, STORE_PATH)
 
 
 def now_iso() -> str:
