@@ -45,6 +45,17 @@ def document_view(doc: dict) -> dict | None:
     }
 
 
+NOTE_CATEGORY_CODE = "clinical-note"
+
+
+def is_clinical_note(doc: dict) -> bool:
+    for category in doc.get("category", []):
+        for coding in category.get("coding", []):
+            if coding.get("code") == NOTE_CATEGORY_CODE:
+                return True
+    return False
+
+
 def _code_text(concept: dict) -> str:
     return concept.get("text") or concept.get("coding", [{}])[0].get("display", "")
 

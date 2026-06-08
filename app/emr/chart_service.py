@@ -63,6 +63,8 @@ def chart_sections(patient_id: str) -> list[dict]:
 def patient_documents(patient_id: str) -> list[dict]:
     documents = []
     for doc in server.search("DocumentReference", patient=patient_id):
+        if not resources.is_clinical_note(doc):
+            continue
         view = resources.document_view(doc)
         if view:
             documents.append(view)

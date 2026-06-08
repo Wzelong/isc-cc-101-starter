@@ -573,6 +573,17 @@
       "resourceType": "DocumentReference",
       "id": "doc-seed-maria",
       "status": "current",
+      "category": [
+        {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/us/core/CodeSystem/us-core-documentreference-category",
+              "code": "clinical-note",
+              "display": "Clinical Note"
+            }
+          ]
+        }
+      ],
       "type": {
         "text": "PCP follow-up note"
       },
