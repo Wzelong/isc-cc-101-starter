@@ -39,6 +39,7 @@ def document_view(doc: dict) -> dict | None:
     except Exception:
         return None
     return {
+        "id": doc.get("id"),
         "title": attachment.get("title", "Untitled"),
         "date": (doc.get("date") or "")[:10],
         "text": text,

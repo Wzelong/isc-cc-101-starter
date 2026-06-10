@@ -16,3 +16,10 @@ async def upload(patient_id: str, file: UploadFile = File(...)):
         f"/patients/{patient_id}?uploaded={quote(file.filename or 'note')}",
         status_code=303,
     )
+
+
+@router.post("/patients/{patient_id}/documents/{document_id}/delete")
+async def delete(patient_id: str, document_id: str):
+    deleted = notes_service.delete_note(patient_id, document_id)
+    suffix = "?deleted=1" if deleted else "?error=note+not+found"
+    return RedirectResponse(f"/patients/{patient_id}{suffix}", status_code=303)

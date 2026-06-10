@@ -22,6 +22,7 @@ def chart(
     patient_id: str,
     error: str | None = None,
     uploaded: str | None = None,
+    deleted: str | None = None,
 ):
     header = chart_service.patient_header(patient_id)
     if not header:
@@ -38,5 +39,6 @@ def chart(
             "active_id": patient_id,
             "error": error,
             "uploaded": uploaded,
+            "deleted": deleted,
         },
     )

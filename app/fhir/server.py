@@ -25,3 +25,14 @@ def create(resource: dict) -> dict:
     data.setdefault(resource["resourceType"], []).append(resource)
     store.save(data)
     return resource
+
+
+def delete(resource_type: str, resource_id: str) -> bool:
+    data = store.load()
+    items = data.get(resource_type, [])
+    kept = [r for r in items if r.get("id") != resource_id]
+    if len(kept) == len(items):
+        return False
+    data[resource_type] = kept
+    store.save(data)
+    return True

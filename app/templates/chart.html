@@ -88,9 +88,17 @@
     .row .dt { flex-shrink: 0; color: var(--muted); opacity: .7; font-size: 12px; font-variant-numeric: tabular-nums; }
     .notes-title { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); padding: 16px 2px 2px; }
     .doc { border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; margin-top: 10px; }
-    .doc-h { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
-    .doc-t { font-weight: 600; font-size: 13px; }
+    .doc-h { display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px; }
+    .doc-t { font-weight: 600; font-size: 13px; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .doc-d { color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+    .doc-del {
+      display: flex; align-items: center; justify-content: center; width: 26px; height: 26px; margin: -4px -6px -4px 0;
+      border: none; background: none; color: var(--muted); border-radius: 7px; cursor: pointer;
+      opacity: 0; transition: opacity .12s ease, background .12s ease, color .12s ease;
+    }
+    .doc:hover .doc-del { opacity: 1; }
+    .doc-del:hover { background: oklch(0.97 0.03 25); color: oklch(0.53 0.14 25); }
+    .doc-del .ic { width: 15px; height: 15px; }
     .doc pre { margin: 0; white-space: pre-wrap; font: 12px/1.6 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: oklch(0.37 0.01 286); }
     .empty { color: var(--muted); font-style: italic; font-size: 13px; padding: 8px 2px; }
 
@@ -220,7 +228,15 @@
       <div class="notes-title">Clinical Notes</div>
       {% for d in documents %}
       <div class="doc">
-        <div class="doc-h"><span class="doc-t">{{ d.title }}</span><span class="doc-d">{{ d.date }}</span></div>
+        <div class="doc-h">
+          <span class="doc-t">{{ d.title }}</span>
+          <span class="doc-d">{{ d.date }}</span>
+          <form class="doc-del-form" action="/patients/{{ active_id }}/documents/{{ d.id }}/delete" method="post" data-title="{{ d.title }}">
+            <button class="doc-del" type="submit" title="Delete note" aria-label="Delete note">
+              <svg class="ic" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+            </button>
+          </form>
+        </div>
         <pre>{{ d.text }}</pre>
       </div>
       {% else %}
@@ -238,6 +254,12 @@
         <div class="upload-ok">
           <svg class="ic" viewBox="0 0 24 24"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg>
           <span>Uploaded <code>{{ uploaded }}</code></span>
+        </div>
+        {% endif %}
+        {% if deleted %}
+        <div class="upload-ok">
+          <svg class="ic" viewBox="0 0 24 24"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg>
+          <span>Note deleted</span>
         </div>
         {% endif %}
         <form class="upload-drop" action="/patients/{{ active_id }}/documents" method="post" enctype="multipart/form-data">
@@ -308,6 +330,13 @@
       document.querySelector(".upload-err")?.remove()
       document.querySelector(".upload-ok")?.remove()
     })
+
+    for (const form of document.querySelectorAll(".doc-del-form")) {
+      form.addEventListener("submit", (e) => {
+        const title = form.dataset.title || "this note"
+        if (!confirm(`Delete "${title}"? This can't be undone.`)) e.preventDefault()
+      })
+    }
 
     const ok = document.querySelector(".upload-ok")
     if (ok) {
